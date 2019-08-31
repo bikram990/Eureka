@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct Tuple<A: Equatable, B: Equatable> {
     
@@ -32,7 +33,7 @@ open class DoublePickerCell<A, B> : _PickerCell<Tuple<A, B>> where A: Equatable,
 
     private var pickerRow: _DoublePickerRow<A, B>? { return row as? _DoublePickerRow<A, B> }
 
-    public required init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public required init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
@@ -42,8 +43,8 @@ open class DoublePickerCell<A, B> : _PickerCell<Tuple<A, B>> where A: Equatable,
 
     open override func update() {
         super.update()
-        if let selectedValue = pickerRow?.value, let indexA = pickerRow?.firstOptions().index(of: selectedValue.a),
-            let indexB = pickerRow?.secondOptions(selectedValue.a).index(of: selectedValue.b) {
+        if let selectedValue = pickerRow?.value, let indexA = pickerRow?.firstOptions().firstIndex(of: selectedValue.a),
+            let indexB = pickerRow?.secondOptions(selectedValue.a).firstIndex(of: selectedValue.b) {
             picker.selectRow(indexA, inComponent: 0, animated: true)
             picker.selectRow(indexB, inComponent: 1, animated: true)
         }

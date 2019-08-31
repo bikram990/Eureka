@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 // MARK: PickerInputCell
 
@@ -36,7 +37,7 @@ open class _PickerInputCell<T> : Cell<T>, CellType, UIPickerViewDataSource, UIPi
 
     fileprivate var pickerInputRow: _PickerInputRow<T>? { return row as? _PickerInputRow<T> }
 
-    public required init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public required init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
@@ -115,7 +116,7 @@ open class _PickerInputCell<T> : Cell<T>, CellType, UIPickerViewDataSource, UIPi
 
 open class PickerInputCell<T>: _PickerInputCell<T> where T: Equatable {
 
-    public required init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public required init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
@@ -125,7 +126,7 @@ open class PickerInputCell<T>: _PickerInputCell<T> where T: Equatable {
     
     open override func update() {
         super.update()
-        if let selectedValue = pickerInputRow?.value, let index = pickerInputRow?.options.index(of: selectedValue) {
+        if let selectedValue = pickerInputRow?.value, let index = pickerInputRow?.options.firstIndex(of: selectedValue) {
             picker.selectRow(index, inComponent: 0, animated: true)
         }
     }
